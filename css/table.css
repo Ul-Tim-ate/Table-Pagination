@@ -26,7 +26,6 @@
 
 .header-row {
   padding: 15px;
-  background-color: rgb(179, 207, 213);
   display: flex;
   align-items: center;
   column-gap: 10px;

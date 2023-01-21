@@ -4,11 +4,50 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/table.css" />
+    <link rel="stylesheet" href="./css/form.css" />
     <title>Infotecs</title>
   </head>
   <body>
+    <!-- Таблица с данными, заполняется динамически в файле fill-table.js -->
     <ul id="table" class="main-table"></ul>
+    <!-- Форма для изменения строки в таблице -->
+    <form id="change-row-form" class="change-row-form">
+      <label for="first-name" class="change-row-label">Change first name</label>
+      <input
+        type="text"
+        id="first-name"
+        placeholder="New first name"
+        class="change-row-input"
+      />
+      <label for="second-name" class="change-row-label"
+        >Change last name
+      </label>
+      <input
+        type="text"
+        id="second-name"
+        placeholder="New last name"
+        class="change-row-input"
+      />
+      <label for="about" class="change-row-label">Change about</label>
+      <textarea
+        name=""
+        id="about"
+        class="change-row-area"
+        placeholder="New about"
+      ></textarea>
+      <label for="eye-color" class="change-row-label">Change eye color</label>
+      <input
+        type="text"
+        id="eye-color"
+        placeholder="New eye color"
+        class="change-row-input"
+      />
+      <ul class="change-row-buttons">
+        <li class="change-row-button"><button>Save</button></li>
+        <li class="change-row-button"><button>Cancel</button></li>
+      </ul>
+    </form>
   </body>
   <script src="./js/fill-table.js" defer></script>
 </html>

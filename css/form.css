@@ -1,0 +1,59 @@
+.change-row-form {
+  position: fixed;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+  width: 20%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 15px;
+  border: 1px solid black;
+  background: rgb(179, 207, 213);
+}
+
+.change-row-label {
+  font-size: 20px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.change-row-input {
+  display: block;
+  margin: 0 auto 10px;
+  padding: 7px;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 15px;
+  width: 90%;
+}
+.change-row-buttons {
+  display: flex;
+  padding-left: 0;
+  justify-content: space-around;
+}
+.change-row-button {
+  list-style: none;
+}
+
+.change-row-button > button {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 3px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.change-row-button > button:hover {
+  color: #fff;
+  background-color: rgb(107, 107, 107);
+}
+
+.change-row-area {
+  width: 90%;
+  height: 100px;
+  max-height: 150px;
+  resize: vertical;
+  padding: 7px;
+  border: 1px solid black;
+}
