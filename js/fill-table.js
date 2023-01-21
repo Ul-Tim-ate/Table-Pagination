@@ -2,6 +2,8 @@ const table = document.getElementById("table");
 const changeForm = document.getElementById("change-row-form");
 const saveButton = changeForm.querySelectorAll(".change-row-button")[0];
 const cancelButton = changeForm.querySelectorAll(".change-row-button")[1];
+const tableHeaders = table.querySelectorAll(".table-header");
+
 let currentRow = null;
 
 const getData = async () => {
@@ -12,9 +14,9 @@ const getData = async () => {
 };
 const putData = async () => {
   const dataJson = Array.from(await getData());
-  let html = "";
   dataJson.forEach((person) => {
-    let row = "";
+    const row = document.createElement("li");
+    row.classList.add("row");
     const {
       name: { firstName, lastName },
       about,
@@ -24,24 +26,19 @@ const putData = async () => {
     const personDataArr = [firstName, lastName, about, eyeColor];
     // формируем html разметку страницы
     personDataArr.forEach((el, index) => {
+      const cell = document.createElement("div");
+      cell.textContent = el;
       if (index === 2) {
-        row += '<div class="cell about">' + el + "</div>";
+        cell.classList.add("cell");
+        cell.classList.add("about");
+        row.appendChild(cell);
         return;
       }
-      row += '<div class="cell">' + el + "</div>";
+      cell.classList.add("cell");
+      row.appendChild(cell);
     });
-    html += `<li class="row">` + row + "</li>";
+    table.appendChild(row);
   });
-  html = `
-  <li class="header-row">
-    <div class="table-header">First name</div>
-    <div class="table-header">Last name</div>
-    <div class="table-header">About</div>
-    <div class="table-header">Eye color</div>
-  </li>
-    ${html}
-  `;
-  table.innerHTML = html;
 };
 const visualForm = () => {
   changeForm.classList.remove("hidden");
@@ -59,7 +56,7 @@ const changeData = (values) => {
 table.addEventListener("click", (e) => {
   const row = e.target.closest("li");
   if (!row) return;
-  if (!table.contains(row)) return;
+  if (!table.contains(row) || row.classList.contains("header-row")) return;
   currentRow = row;
   visualForm();
 });
@@ -84,5 +81,14 @@ cancelButton.addEventListener("click", (e) => {
   changeForm.classList.add("hidden");
   clearForm();
 });
+saveButton.addEventListener("click", (e) => {
+  changeForm.classList.add("hidden");
+});
+
+const sortColumn = () => {};
 
 putData();
+
+tableHeaders.forEach((header, index) => {
+  header.addEventListener("click", (e) => {console.log(index);});
+});

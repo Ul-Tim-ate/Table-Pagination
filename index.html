@@ -10,7 +10,14 @@
   </head>
   <body>
     <!-- Таблица с данными, заполняется динамически в файле fill-table.js -->
-    <ul id="table" class="main-table"></ul>
+    <ul id="table" class="main-table">
+      <li class="header-row">
+        <div class="table-header">First name</div>
+        <div class="table-header">Last name</div>
+        <div class="table-header">About</div>
+        <div class="table-header">Eye color</div>
+      </li>
+    </ul>
     <!-- Форма для изменения строки в таблице -->
     <form id="change-row-form" class="change-row-form hidden">
       <label for="first-name" class="change-row-label">Change first name</label>
