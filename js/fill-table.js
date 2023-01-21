@@ -3,7 +3,6 @@ const changeForm = document.getElementById("change-row-form");
 const saveButton = changeForm.querySelectorAll(".change-row-button")[0];
 const cancelButton = changeForm.querySelectorAll(".change-row-button")[1];
 const tableHeaders = table.querySelectorAll(".table-header");
-
 let currentRow = null;
 
 const getData = async () => {
@@ -28,13 +27,23 @@ const putData = async () => {
     personDataArr.forEach((el, index) => {
       const cell = document.createElement("div");
       cell.textContent = el;
-      if (index === 2) {
-        cell.classList.add("cell");
-        cell.classList.add("about");
-        row.appendChild(cell);
-        return;
-      }
       cell.classList.add("cell");
+      switch (index) {
+        case 0:
+          cell.classList.add("first-name");
+          break;
+        case 1:
+          cell.classList.add("last-name");
+          break;
+        case 2:
+          cell.classList.add("about");
+          break;
+        case 3:
+          cell.classList.add("eye");
+          break;
+        default:
+          break;
+      }
       row.appendChild(cell);
     });
     table.appendChild(row);
@@ -85,10 +94,38 @@ saveButton.addEventListener("click", (e) => {
   changeForm.classList.add("hidden");
 });
 
-const sortColumn = () => {};
+const getSortColumn = (column) => {
+  let sortedFields = Array.from(column).sort((rowA, rowB) =>
+    rowA.textContent > rowB.textContent ? 1 : -1
+  );
+  const sortedRows = [];
+  sortedFields.forEach((field) => {
+    sortedRows.push(field.parentNode);
+  });
+  table.append(...sortedRows);
+};
 
 putData();
 
 tableHeaders.forEach((header, index) => {
-  header.addEventListener("click", (e) => {console.log(index);});
+  header.addEventListener("click", (e) => {
+    let sortColumn;
+    switch (index) {
+      case 0:
+        sortColumn = table.getElementsByClassName("first-name");
+        break;
+      case 1:
+        sortColumn = table.getElementsByClassName("last-name");
+        break;
+      case 2:
+        sortColumn = table.getElementsByClassName("about");
+        break;
+      case 3:
+        sortColumn = table.getElementsByClassName("eye");
+        break;
+      default:
+        break;
+    }
+    getSortColumn(sortColumn);
+  });
 });
