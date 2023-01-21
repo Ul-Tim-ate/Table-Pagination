@@ -12,13 +12,13 @@
     <!-- Таблица с данными, заполняется динамически в файле fill-table.js -->
     <ul id="table" class="main-table"></ul>
     <!-- Форма для изменения строки в таблице -->
-    <form id="change-row-form" class="change-row-form">
+    <form id="change-row-form" class="change-row-form hidden">
       <label for="first-name" class="change-row-label">Change first name</label>
       <input
         type="text"
         id="first-name"
         placeholder="New first name"
-        class="change-row-input"
+        class="change-row-input change-row-field"
       />
       <label for="second-name" class="change-row-label"
         >Change last name
@@ -27,13 +27,13 @@
         type="text"
         id="second-name"
         placeholder="New last name"
-        class="change-row-input"
+        class="change-row-input change-row-field"
       />
       <label for="about" class="change-row-label">Change about</label>
       <textarea
         name=""
         id="about"
-        class="change-row-area"
+        class="change-row-area change-row-field"
         placeholder="New about"
       ></textarea>
       <label for="eye-color" class="change-row-label">Change eye color</label>
@@ -41,7 +41,7 @@
         type="text"
         id="eye-color"
         placeholder="New eye color"
-        class="change-row-input"
+        class="change-row-input change-row-field"
       />
       <ul class="change-row-buttons">
         <li class="change-row-button"><button>Save</button></li>

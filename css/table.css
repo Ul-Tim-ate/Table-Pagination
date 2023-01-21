@@ -36,6 +36,7 @@
   font-size: 25px;
   text-align: center;
   width: 25%;
+  word-wrap: break-word;
 }
 
 .about {

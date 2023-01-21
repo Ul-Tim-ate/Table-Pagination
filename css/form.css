@@ -10,13 +10,11 @@
   border: 1px solid black;
   background: rgb(179, 207, 213);
 }
-
 .change-row-label {
   font-size: 20px;
   display: block;
   margin-bottom: 10px;
 }
-
 .change-row-input {
   display: block;
   margin: 0 auto 10px;
@@ -34,7 +32,6 @@
 .change-row-button {
   list-style: none;
 }
-
 .change-row-button > button {
   font-size: 20px;
   cursor: pointer;
@@ -42,13 +39,12 @@
   border: 1px solid black;
   border-radius: 5px;
   background-color: #fff;
-  transition: 0.3s;
 }
 .change-row-button > button:hover {
   color: #fff;
   background-color: rgb(107, 107, 107);
+  transition: 0.3s;
 }
-
 .change-row-area {
   width: 90%;
   height: 100px;
@@ -56,4 +52,7 @@
   resize: vertical;
   padding: 7px;
   border: 1px solid black;
+}
+.hidden {
+  display: none;
 }
