@@ -21,9 +21,32 @@
           name
         </div>
         <div class="table-header unsorted">About</div>
-        <div class="table-header unsorted">Eye <br> color</div>
+        <div class="table-header unsorted">
+          Eye <br />
+          color
+        </div>
       </li>
     </ul>
+    <div class="table-buttons">
+      <div class="">
+        <button class="table-button hidden" id="prev-button">
+          <img
+            src="./img/arrow-left.svg"
+            alt="Получить предыдущие 10 строк"
+            class="table-button-img"
+          />
+        </button>
+      </div>
+      <div class="">
+        <button class="table-button" id="next-button">
+          <img
+            src="./img/arrow-right.svg"
+            alt="Получить следующие 10 строк"
+            class="table-button-img"
+          />
+        </button>
+      </div>
+    </div>
     <!-- Форма для изменения строки в таблице -->
     <form id="change-row-form" class="change-row-form hidden">
       <label for="first-name" class="change-row-label">Change first name</label>

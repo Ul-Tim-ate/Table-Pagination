@@ -4,16 +4,35 @@ const saveButton = changeForm.querySelectorAll(".change-row-button")[0];
 const cancelButton = changeForm.querySelectorAll(".change-row-button")[1];
 const tableHeaders = table.querySelectorAll(".table-header");
 const fields = changeForm.querySelectorAll(".change-row-field");
+const prevButton = document.getElementById("prev-button");
+const nextButton = document.getElementById("next-button");
+let jsonData = [];
 let currentRow = null;
+let currentRowIndex = null;
+let page = 1;
 
 const getData = async () => {
   //получаем данные из локального файла data.json
-  return await fetch("../data.json").then((res) => {
+  if (jsonData.length !== 0) return jsonData;
+  jsonData = await fetch("../data.json").then((res) => {
     return res.json();
   });
+  return jsonData;
 };
-const putData = async () => {
-  const dataJson = Array.from(await getData());
+
+const getOnePageData = async (page) => {
+  const data = await getData();
+  return data.slice((page - 1) * 9, page * 9);
+};
+
+const clearOldData = () => {
+  const rows = table.querySelectorAll(".row");
+  rows.forEach((row) => row.remove());
+};
+
+const putData = async (page) => {
+  clearOldData();
+  const dataJson = Array.from(await getOnePageData(page));
   dataJson.forEach((person) => {
     const row = document.createElement("li");
     row.classList.add("row");
@@ -57,6 +76,15 @@ const visualForm = (row) => {
   );
   changeForm.classList.remove("hidden");
 };
+
+const changeDataInArr = (values) => {
+  const indexInArr = currentRowIndex + 10 * (page - 1) - 1;
+  jsonData[indexInArr].name.firstName = values[0];
+  jsonData[indexInArr].name.lastName = values[1];
+  jsonData[indexInArr].about = values[2];
+  jsonData[indexInArr].eyeColor = values[3];
+};
+
 const changeData = (values) => {
   const cells = currentRow.querySelectorAll("div");
   cells.forEach((cell, index) => {
@@ -66,12 +94,17 @@ const changeData = (values) => {
     }
     cell.textContent = values[index];
   });
+  changeDataInArr(values);
 };
 table.addEventListener("click", (e) => {
   const row = e.target.closest("li");
   if (!row) return;
   if (!table.contains(row) || row.classList.contains("header-row")) return;
+  //////////////////////
   currentRow = row;
+  currentRowIndex = Array.from(currentRow.parentNode.children).indexOf(
+    currentRow
+  );
   visualForm(row);
 });
 const clearForm = () => {
@@ -99,11 +132,44 @@ saveButton.addEventListener("click", (e) => {
   changeForm.classList.add("hidden");
 });
 
+const rezetSort = () => {
+  tableHeaders.forEach((header) => {
+    header.classList.remove("sorted");
+    header.classList.add("unsorted");
+  });
+};
+
+prevButton.addEventListener("click", (e) => {
+  page--;
+  putData(page);
+  if (page <= 1) {
+    prevButton.classList.add("hidden");
+    return;
+  }
+  cancelButton.click();
+  rezetSort();
+});
+
+nextButton.addEventListener("click", (e) => {
+  page++;
+  putData(page);
+  if (page >= jsonData.length / 9) {
+    nextButton.classList.add("hidden");
+  }
+  if (prevButton.classList.contains("hidden")) {
+    prevButton.classList.remove("hidden");
+  }
+  cancelButton.click();
+  rezetSort();
+});
+
 const getSortColumn = (column, columnId) => {
   let flag = 1;
   if (!tableHeaders[columnId].classList.contains("sorted")) flag = -1;
   let sortedFields = Array.from(column).sort((rowA, rowB) =>
-    rowA.textContent > rowB.textContent ? flag : -1 * flag
+    rowA.textContent.toLowerCase() > rowB.textContent.toLowerCase()
+      ? flag
+      : -1 * flag
   );
   const sortedRows = [];
   sortedFields.forEach((field) => {
@@ -112,7 +178,7 @@ const getSortColumn = (column, columnId) => {
   table.append(...sortedRows);
 };
 
-putData();
+putData(page);
 
 tableHeaders.forEach((header, index) => {
   header.addEventListener("click", (e) => {
