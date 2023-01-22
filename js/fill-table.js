@@ -94,9 +94,11 @@ saveButton.addEventListener("click", (e) => {
   changeForm.classList.add("hidden");
 });
 
-const getSortColumn = (column) => {
+const getSortColumn = (column, columnId) => {
+  let flag = 1;
+  if (!tableHeaders[columnId].classList.contains("sorted")) flag = -1;
   let sortedFields = Array.from(column).sort((rowA, rowB) =>
-    rowA.textContent > rowB.textContent ? 1 : -1
+    rowA.textContent > rowB.textContent ? flag : -1 * flag
   );
   const sortedRows = [];
   sortedFields.forEach((field) => {
@@ -110,22 +112,38 @@ putData();
 tableHeaders.forEach((header, index) => {
   header.addEventListener("click", (e) => {
     let sortColumn;
+    let columnId;
+    tableHeaders.forEach((header, removeIndex) => {
+      if (index === removeIndex) return;
+      header.classList.add("unsorted");
+      header.classList.remove("sorted");
+    });
+    tableHeaders[index].classList.remove("unsorted");
     switch (index) {
       case 0:
         sortColumn = table.getElementsByClassName("first-name");
+        tableHeaders[0].classList.toggle("sorted");
+        columnId = 0;
         break;
       case 1:
         sortColumn = table.getElementsByClassName("last-name");
+        tableHeaders[1].classList.toggle("sorted");
+        columnId = 1;
         break;
       case 2:
         sortColumn = table.getElementsByClassName("about");
+        tableHeaders[2].classList.toggle("sorted");
+        columnId = 2;
         break;
       case 3:
         sortColumn = table.getElementsByClassName("eye");
+        tableHeaders[3].classList.toggle("sorted");
+        columnId = 3;
         break;
       default:
         break;
     }
-    getSortColumn(sortColumn);
+
+    getSortColumn(sortColumn, columnId);
   });
 });
