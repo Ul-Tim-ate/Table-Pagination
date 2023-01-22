@@ -3,6 +3,7 @@ const changeForm = document.getElementById("change-row-form");
 const saveButton = changeForm.querySelectorAll(".change-row-button")[0];
 const cancelButton = changeForm.querySelectorAll(".change-row-button")[1];
 const tableHeaders = table.querySelectorAll(".table-header");
+const fields = changeForm.querySelectorAll(".change-row-field");
 let currentRow = null;
 
 const getData = async () => {
@@ -49,7 +50,11 @@ const putData = async () => {
     table.appendChild(row);
   });
 };
-const visualForm = () => {
+const visualForm = (row) => {
+  const rowFields = row.querySelectorAll("div");
+  fields.forEach(
+    (field, index) => (field.value = rowFields[index].textContent)
+  );
   changeForm.classList.remove("hidden");
 };
 const changeData = (values) => {
@@ -67,7 +72,7 @@ table.addEventListener("click", (e) => {
   if (!row) return;
   if (!table.contains(row) || row.classList.contains("header-row")) return;
   currentRow = row;
-  visualForm();
+  visualForm(row);
 });
 const clearForm = () => {
   const fields = changeForm.querySelectorAll(".change-row-field");
