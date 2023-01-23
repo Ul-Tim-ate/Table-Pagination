@@ -1,3 +1,5 @@
+import colorWordToHexCode from "./colors.js";
+
 const table = document.getElementById("table");
 const changeForm = document.getElementById("change-row-form");
 const saveButton = changeForm.querySelectorAll(".change-row-button")[0];
@@ -19,17 +21,14 @@ const getData = async () => {
   });
   return jsonData;
 };
-
 const getOnePageData = async (page) => {
   const data = await getData();
   return data.slice((page - 1) * 9, page * 9);
 };
-
 const clearOldData = () => {
   const rows = table.querySelectorAll(".row");
   rows.forEach((row) => row.remove());
 };
-
 const putData = async (page) => {
   clearOldData();
   const dataJson = Array.from(await getOnePageData(page));
@@ -46,20 +45,25 @@ const putData = async (page) => {
     // формируем html разметку страницы
     personDataArr.forEach((el, index) => {
       const cell = document.createElement("div");
-      cell.textContent = el;
       cell.classList.add("cell");
       switch (index) {
         case 0:
           cell.classList.add("first-name");
+          cell.textContent = el;
           break;
         case 1:
           cell.classList.add("last-name");
+          cell.textContent = el;
           break;
         case 2:
           cell.classList.add("about");
+          cell.textContent = el;
           break;
         case 3:
           cell.classList.add("eye");
+          cell.textContent = colorWordToHexCode(el);
+          cell.style.color = el;
+          cell.style.background = el;
           break;
         default:
           break;
@@ -76,7 +80,6 @@ const visualForm = (row) => {
   );
   changeForm.classList.remove("hidden");
 };
-
 const changeDataInArr = (values) => {
   const indexInArr = currentRowIndex + 10 * (page - 1) - 1;
   jsonData[indexInArr].name.firstName = values[0];
@@ -84,13 +87,16 @@ const changeDataInArr = (values) => {
   jsonData[indexInArr].about = values[2];
   jsonData[indexInArr].eyeColor = values[3];
 };
-
 const changeData = (values) => {
   const cells = currentRow.querySelectorAll("div");
   cells.forEach((cell, index) => {
     //если input пустой или только пробелы, то ячейку не изменяем
     if (!values[index].trim()) {
       return;
+    }
+    if (index === 3) {
+      cell.style.color = values[index];
+      cell.style.background = values[index];
     }
     cell.textContent = values[index];
   });
@@ -131,14 +137,12 @@ cancelButton.addEventListener("click", (e) => {
 saveButton.addEventListener("click", (e) => {
   changeForm.classList.add("hidden");
 });
-
 const rezetSort = () => {
   tableHeaders.forEach((header) => {
     header.classList.remove("sorted");
     header.classList.add("unsorted");
   });
 };
-
 prevButton.addEventListener("click", (e) => {
   page--;
   putData(page);
@@ -149,7 +153,6 @@ prevButton.addEventListener("click", (e) => {
   cancelButton.click();
   rezetSort();
 });
-
 nextButton.addEventListener("click", (e) => {
   page++;
   putData(page);
@@ -162,7 +165,6 @@ nextButton.addEventListener("click", (e) => {
   cancelButton.click();
   rezetSort();
 });
-
 const getSortColumn = (column, columnId) => {
   let flag = 1;
   if (!tableHeaders[columnId].classList.contains("sorted")) flag = -1;
@@ -177,9 +179,7 @@ const getSortColumn = (column, columnId) => {
   });
   table.append(...sortedRows);
 };
-
 putData(page);
-
 tableHeaders.forEach((header, index) => {
   header.addEventListener("click", (e) => {
     let sortColumn;
