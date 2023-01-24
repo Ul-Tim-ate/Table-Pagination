@@ -5,7 +5,7 @@
   transform: translate(0, -50%);
   left: 15px;
   text-align: center;
-  padding: 5px;
+  padding: 10px;
   border-radius: 15px;
   border: 1px solid black;
   background: rgb(179, 207, 213);
@@ -18,9 +18,22 @@
 }
 
 .hide-column-form__select {
-  font-size: 15px;
+  padding: 2px 3px;
+  font-size: 19px;
+  background-color: #fff;
+  padding: 3px 5px;
+  border-radius: 5px;
+  margin-right: 5px;
 }
 
 .hide-column-form__button {
-  font-size: 15px;
+  font-size: 19px;
+  background-color: #fff;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+.hide-column-form__button:hover {
+  color: #fff;
+  background-color: rgb(107, 107, 107);
+  transition: 0.3s;
 }

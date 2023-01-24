@@ -23,6 +23,7 @@
   border-radius: 10px;
   font-size: 15px;
   width: 90%;
+  background-color: #fff;
 }
 .change-row-buttons {
   display: flex;
@@ -52,6 +53,7 @@
   resize: vertical;
   padding: 7px;
   border: 1px solid black;
+  background-color: #fff;
 }
 .hidden {
   display: none;
