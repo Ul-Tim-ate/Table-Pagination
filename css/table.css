@@ -1,6 +1,5 @@
 .main-table {
   max-width: 50%;
-  width: 50%;
   margin: 0 auto;
   padding: 0;
 }
@@ -60,6 +59,7 @@
 .header-row {
   padding: 10px;
   display: flex;
+  flex-basis: content;
   align-items: center;
   column-gap: 10px;
   background-color: rgb(135, 104, 237);

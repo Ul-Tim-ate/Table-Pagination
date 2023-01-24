@@ -1,15 +1,17 @@
-import { ChangeForm } from "./form.js";
+import { ChangeForm } from "./change-form.js";
+import { HideForm } from "./hide-form.js";
 import { ManageTable } from "./table.js";
 
 const table = document.getElementById("table");
 const changeForm = document.getElementById("change-row-form");
+const hideForm = document.getElementById("hide-column-form");
 const saveButton = changeForm.querySelectorAll(".change-row-button")[0];
 const cancelButton = changeForm.querySelectorAll(".change-row-button")[1];
 const tableHeaders = table.querySelectorAll(".table-header");
 const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
-
 const formChange = new ChangeForm(changeForm);
+const formHide = new HideForm(hideForm, tableHeaders);
 const manageTable = new ManageTable(
   table,
   tableHeaders,
@@ -39,6 +41,13 @@ changeForm.addEventListener("submit", (e) => {
   manageTable.changeData(values);
   // очищаем форму
   formChange.clearForm();
+});
+hideForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  formHide.doSubmit();
+  manageTable.updateVisibillity(
+    e.target.getElementsByTagName("select")[0].value
+  );
 });
 cancelButton.addEventListener("click", (e) => {
   e.preventDefault();

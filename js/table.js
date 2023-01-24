@@ -93,6 +93,9 @@ export class ManageTable {
       personDataArr.forEach((el, index) => {
         const cell = document.createElement("div");
         cell.classList.add("cell");
+        if (this.tableHeaders[index].classList.contains("invis")) {
+          cell.classList.add("invis");
+        }
         switch (index) {
           case 0:
             cell.classList.add("first-name");
@@ -170,7 +173,28 @@ export class ManageTable {
       header.classList.add("unsorted");
     });
   };
-
+  updateVisibillity = (tableHeaderIndex) => {
+    let currentRows;
+    switch (tableHeaderIndex) {
+      case "0":
+        currentRows = this.table.querySelectorAll(".first-name");
+        break;
+      case "1":
+        currentRows = this.table.querySelectorAll(".last-name");
+        break;
+      case "2":
+        currentRows = this.table.querySelectorAll(".about");
+        break;
+      case "3":
+        currentRows = this.table.querySelectorAll(".eye");
+        break;
+      default:
+        currentRows = [];
+        break;
+    }
+    // для каждой видимой ячейки добавляем невидимость
+    currentRows.forEach((cell) => cell.classList.toggle("invis"));
+  };
   eventListenerForHeaders = (index) => {
     let sortColumn;
     // при клике на заголовок, убираем сортировку по другому заголовку
