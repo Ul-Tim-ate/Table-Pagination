@@ -1,0 +1,26 @@
+.hide-column-form {
+  position: fixed;
+  width: 20%;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 15px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 15px;
+  border: 1px solid black;
+  background: rgb(179, 207, 213);
+}
+
+.hide-column-form__label {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.hide-column-form__select {
+  font-size: 15px;
+}
+
+.hide-column-form__button {
+  font-size: 15px;
+}

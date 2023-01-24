@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/table.css" />
     <link rel="stylesheet" href="./css/form.css" />
+    <link rel="stylesheet" href="./css/hide-display-form.css" />
     <title>Infotecs</title>
   </head>
   <body>
@@ -84,6 +85,19 @@
         <li class="change-row-button"><button>Save</button></li>
         <li class="change-row-button"><button>Cancel</button></li>
       </ul>
+    </form>
+    <!-- Форма для скрытия/показа колонки -->
+    <form id="hide-column-form" class="hide-column-form">
+      <label for="hide-dispalay-column" class="hide-column-form__label"
+        >Выберите какую колонку скрыть/показать</label
+      >
+      <select id="hide-dispalay-column" class="hide-column-form__select">
+        <option class="hide-column-form__option">First name</option>
+        <option class="hide-column-form__option">Last name</option>
+        <option class="hide-column-form__option">About</option>
+        <option class="hide-column-form__option">Eye color</option>
+      </select>
+      <button class="hide-column-form__button">Применить</button>
     </form>
   </body>
   <script src="/js/main.js" type="module" defer></script>
